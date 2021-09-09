@@ -99,6 +99,9 @@ func (cfg Config) PunchRoutine(ctx context.Context, account Account, done chan s
 		switch err {
 		case nil:
 			cfg.Logger.Print("Punch finished\n")
+			E1 := cfg.Sender.Send(cfg.MailNickName,
+				fmt.Sprintf("打卡状态推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
+				fmt.Sprintf("账户：%s 打卡成功(err: %s)", account.Name()))
 			return
 		case context.Canceled:
 			return

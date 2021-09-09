@@ -1,0 +1,12 @@
+{
+	"to": [
+		"2592532554@qq.com"
+	],
+	"SMTP": {
+		"username": "pengzhiyuan2000@163.com",
+		"password": "Ilovexyj",
+		"TLS": true,
+		"host": "smtp.163.com",
+		"port": 465
+	}
+}

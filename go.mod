@@ -1,4 +1,4 @@
-module github.com/yin1999/healthreport
+module github.com/pzy2000/healthreport
 
 go 1.17
 

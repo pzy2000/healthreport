@@ -12,11 +12,11 @@ import (
 	"syscall"
 	"time"
 
-	client "github.com/yin1999/healthreport/httpclient"
-	"github.com/yin1999/healthreport/serve"
-	"github.com/yin1999/healthreport/utils/config"
-	"github.com/yin1999/healthreport/utils/email"
-	"github.com/yin1999/healthreport/utils/systemd"
+	client "github.com/pzy2000/healthreport/httpclient"
+	"github.com/pzy2000/healthreport/serve"
+	"github.com/pzy2000/healthreport/utils/config"
+	"github.com/pzy2000/healthreport/utils/email"
+	"github.com/pzy2000/healthreport/utils/systemd"
 )
 
 // build info
@@ -79,13 +79,13 @@ func app(ctx context.Context, ready func()) {
 		logger.Print("Email deliver enabled\n")
 	}
 
-	logger.Print("正在验证账号密码\n")
+	logger.Print("正在验证账号密码...\n")
 	err = client.LoginConfirm(ctx, account, punchTimeout)
 	if err != nil {
 		logger.Fatalf("验证密码失败(Err: %s)\n", err.Error())
 	}
 	ready()
-	logger.Print("账号密码验证成功，将在5秒后开始打卡\n")
+	logger.Print("账号密码验证成功，Punch in 5 secs!\n")
 
 	serveCfg := &serve.Config{
 		Sender:      emailCfg,
