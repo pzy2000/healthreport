@@ -101,7 +101,7 @@ func (cfg Config) PunchRoutine(ctx context.Context, account Account, done chan s
 			cfg.Logger.Print("Punch finished\n")
 			E1 := cfg.Sender.Send(cfg.MailNickName,
 				fmt.Sprintf("打卡状态推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
-				fmt.Sprintf("账户：%s 打卡成功", account.Name()))
+				fmt.Sprintf("账户：%s 打卡成功\n(本邮件由healthreport自动发送，请勿回复哦)", account.Name()))
 			if E1 != nil {
 				
 			}
