@@ -1,5 +1,5 @@
 # 健康打卡
-
+本项目fork自涛哥打卡，添加了打开成功后自动邮件通知的功能。(使用方法与原版完全相同)
 [![build](https://github.com/yin1999/healthreport/actions/workflows/Build.yml/badge.svg)](https://github.com/yin1999/healthreport/actions/workflows/Build.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/yin1999/healthreport)](https://goreportcard.com/report/github.com/yin1999/healthreport) [![Go Reference](https://pkg.go.dev/badge/github.com/yin1999/healthreport.svg)](https://pkg.go.dev/github.com/yin1999/healthreport)
 
 项目使用http请求模拟整个打卡过程，速度很快！  
@@ -62,7 +62,7 @@
 1. 安装 screen（可选择配置使用systemd，配置文件模板: `_script/healthreport.service`）
 
 	```bash
-	sudo yum install screen  # CentOS
+	sudo yum install screen  # Cent
 	sudo apt install screen  # Debian/Ubuntu
 	```
 
