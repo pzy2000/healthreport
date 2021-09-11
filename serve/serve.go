@@ -128,7 +128,7 @@ func (cfg Config) PunchRoutine(ctx context.Context, account Account, done chan s
 	// error handling
 	if cfg.Sender != nil {
 		e := cfg.Sender.Send(cfg.MailNickName,
-			fmt.Sprintf("打卡状态推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
+			fmt.Sprintf("(失败!)打卡失败推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
 			fmt.Sprintf("账户：%s 打卡失败(err: %s)", account.Name(), err.Error()))
 		if e != nil {
 			cfg.Logger.Printf("Send message failed, err: %s\n", e.Error())
