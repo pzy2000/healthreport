@@ -99,17 +99,18 @@ func (cfg Config) PunchRoutine(ctx context.Context, account Account, done chan s
 		switch err {
 		case nil:
 			cfg.Logger.Print("Punch finished\n")
-			E1 := cfg.Sender.Send(cfg.MailNickName,
+			cfg.Sender.Send(cfg.MailNickName,
 				fmt.Sprintf("打卡状态推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
 				fmt.Sprintf("账户：%s 打卡成功\n(本邮件由healthreport自动发送，请勿回复哦)", account.Name()))
-			if E1 != nil {
-				
-			}
+
 			return
 		case context.Canceled:
 			return
 		default:
 			cfg.Logger.Printf("Tried %d times. Retry after %v\n", punchCount, cfg.RetryAfter)
+			cfg.Sender.Send(cfg.MailNickName,
+				fmt.Sprintf("打卡暂时失败-已尝试%d次", punchCount),
+				fmt.Sprintf("账户：%s 打卡失败\n将于5分钟后再试一次(本邮件由healthreport自动发送，请勿回复哦)", account.Name()))
 		}
 
 		// waiting
@@ -128,7 +129,7 @@ func (cfg Config) PunchRoutine(ctx context.Context, account Account, done chan s
 	// error handling
 	if cfg.Sender != nil {
 		e := cfg.Sender.Send(cfg.MailNickName,
-			fmt.Sprintf("(失败!)打卡失败推送-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
+			fmt.Sprintf("打卡彻底失败！-%s", time.Now().In(cfg.Time.TimeZone).Format("2006-01-02")),
 			fmt.Sprintf("账户：%s 打卡失败(err: %s)", account.Name(), err.Error()))
 		if e != nil {
 			cfg.Logger.Printf("Send message failed, err: %s\n", e.Error())
